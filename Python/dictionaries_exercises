@@ -1,0 +1,77 @@
+# 1) Dictionary erstellen und ausgeben
+person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York"
+}
+print("Initial dictionary:", person)
+
+# 2) Elemente auslesen (Zugriff/Views/get mit Default)
+print("\n--- Access Dictionary Elements ---")
+print("Name via []:", person["name"])
+print("Email via get():", person.get("email", "Not provided"))
+print("All keys:", list(person.keys()))
+print("All values:", list(person.values()))
+print("All items:", list(person.items()))
+
+# 3) Schlüssel-Existenz prüfen
+print("\n--- Check for Key Existence ---")
+if "age" in person:
+    print("'age' key exists.")
+else:
+    print("'age' key does NOT exist.")
+
+# 4) Elemente ändern/aktualisieren (Assignment + update)
+print("\n--- Change and Update Dictionary Elements ---")
+person["city"] = "Boston"  # direct assignment
+person.update({"occupation": "Engineer", "email": "alice@example.com"})  # multiple updates
+print("After city assignment and update():", person)
+
+# 5) Neue Elemente hinzufügen (Assignment + update)
+print("\n--- Add New Items ---")
+person["country"] = "USA"  # new key
+print("After adding country:", person)
+person.update({"hobby": "cycling"})  # another new key
+print("After adding hobby via update():", person)
+
+# 6) Elemente entfernen (pop, popitem, del, clear)
+print("\n--- Remove Items ---")
+removed_age = person.pop("age", None)  # returns value or None if absent
+print("Removed age via pop():", removed_age)
+print("After pop('age'):", person)
+
+last_pair = person.popitem()  # removes last inserted (Python 3.7+)
+print("Removed last pair via popitem():", last_pair)
+print("After popitem():", person)
+
+# ensure key exists before del demo
+person["temp_key"] = "temp_value"
+del person["temp_key"]
+print("After del person['temp_key']:", person)
+
+person.clear()
+print("After clear():", person)
+
+# 7) Dictionary kopieren (shallow copy) und Unabhängigkeit zeigen
+print("\n--- Copy a Dictionary (shallow) ---")
+# neu initialisieren für die Kopier-Demo
+original = {"name": "Alice", "tags": ["python", "sql"], "level": 3}
+copy_via_method = original.copy()     # shallow copy
+copy_via_ctor = dict(original)        # shallow copy via constructor
+
+# modify original top-level and nested to show shallow behavior
+original["level"] = 4                 # top-level change: copies unaffected
+original["tags"].append("docker")     # nested mutable change: reflected in both
+
+print("Original:", original)
+print("Copy via .copy():", copy_via_method)
+print("Copy via dict():", copy_via_ctor)
+
+# 8) setdefault verwenden (bestehender und fehlender Schlüssel)
+print("\n--- Using setdefault() ---")
+data = {"name": "Alice", "city": "Boston"}
+val_existing = data.setdefault("name", "Unknown")          # returns existing
+val_missing = data.setdefault("timezone", "UTC")           # inserts default
+print("Returned existing name:", val_existing)
+print("Returned default for missing key:", val_missing)
+print("After setdefault operations:", data)
