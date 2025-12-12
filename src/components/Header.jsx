@@ -1,4 +1,4 @@
-function Header({ completedCount, totalCount }) {
+const Header = ({ completedCount, totalCount }) => {
   return (
     <header className="header">
       <h1>Habit Tracker</h1>
@@ -10,6 +10,6 @@ function Header({ completedCount, totalCount }) {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

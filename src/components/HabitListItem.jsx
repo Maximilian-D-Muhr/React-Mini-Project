@@ -1,18 +1,18 @@
 import ProgressActions from './ProgressActions';
 
-function HabitListItem({ habit, onUpdateProgress }) {
+const HabitListItem = ({ habit, updateHabitProgress }) => {
   const isComplete = habit.progress === habit.goal;
 
   const handleIncrement = () => {
-    onUpdateProgress(habit.id, 1);
+    updateHabitProgress(habit.id, 1);
   };
 
   const handleDecrement = () => {
-    onUpdateProgress(habit.id, -1);
+    updateHabitProgress(habit.id, -1);
   };
 
   return (
-    <li className={`habit-list-item ${isComplete ? 'completed' : ''}`}>
+    <li className={isComplete ? 'habit-list-item completed' : 'habit-list-item'}>
       <div className="habit-info">
         <span className="habit-name">{habit.name}</span>
         <span className="habit-progress">
@@ -26,6 +26,6 @@ function HabitListItem({ habit, onUpdateProgress }) {
       />
     </li>
   );
-}
+};
 
 export default HabitListItem;

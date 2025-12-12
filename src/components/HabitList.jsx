@@ -1,6 +1,6 @@
 import HabitListItem from './HabitListItem';
 
-function HabitList({ habits, onUpdateProgress }) {
+const HabitList = ({ habits, updateHabitProgress }) => {
   if (habits.length === 0) {
     return (
       <div className="habit-list-empty">
@@ -11,15 +11,17 @@ function HabitList({ habits, onUpdateProgress }) {
 
   return (
     <ul className="habit-list">
-      {habits.map(habit => (
-        <HabitListItem
-          key={habit.id}
-          habit={habit}
-          onUpdateProgress={onUpdateProgress}
-        />
-      ))}
+      {habits.map((habit) => {
+        return (
+          <HabitListItem
+            key={habit.id}
+            habit={habit}
+            updateHabitProgress={updateHabitProgress}
+          />
+        );
+      })}
     </ul>
   );
-}
+};
 
 export default HabitList;

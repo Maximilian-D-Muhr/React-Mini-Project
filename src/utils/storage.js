@@ -1,27 +1,27 @@
-const STORAGE_KEY = 'habit-tracker-habits';
+export const getFromLocalStorage = (key) => {
+  return JSON.parse(localStorage.getItem(key)) ?? [];
+};
 
-export function loadHabits() {
-  try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
-  } catch (error) {
-    console.error('Error loading habits from localStorage:', error);
-    return [];
-  }
-}
+export const saveToLocalStorage = (key, items) => {
+  localStorage.setItem(key, JSON.stringify(items));
+};
 
-export function saveHabits(habits) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(habits));
-  } catch (error) {
-    console.error('Error saving habits to localStorage:', error);
-  }
-}
+export const addToLocalStorage = (key, item) => {
+  const items = getFromLocalStorage(key);
+  localStorage.setItem(key, JSON.stringify([...items, item]));
+};
 
-export function clearHabits() {
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-  } catch (error) {
-    console.error('Error clearing habits from localStorage:', error);
-  }
-}
+export const deleteFromLocalStorage = (key, id) => {
+  const items = getFromLocalStorage(key);
+  const filteredItems = items.filter((item) => item.id !== id);
+  localStorage.setItem(key, JSON.stringify(filteredItems));
+};
+
+export const updateInLocalStorage = (key, id, updatedItem) => {
+  const items = getFromLocalStorage(key);
+  const updatedItems = items.map((item) => {
+    if (item.id !== id) return item;
+    return updatedItem;
+  });
+  localStorage.setItem(key, JSON.stringify(updatedItems));
+};

@@ -1,30 +1,32 @@
-import { useState } from 'react';
 import { DEFAULT_GOAL } from '../constants';
 
-function HabitForm({ onAddHabit }) {
-  const [name, setName] = useState('');
-  const [goal, setGoal] = useState(DEFAULT_GOAL);
-  const [error, setError] = useState('');
-
+const HabitForm = ({ addHabit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const trimmedName = name.trim();
-    if (!trimmedName) {
-      setError('Please enter a habit name');
+    const name = e.target.elements.name.value.trim();
+    const goal = Number(e.target.elements.goal.value);
+
+    if (!name) {
+      alert('Please enter a habit name');
       return;
     }
 
-    const goalNumber = Number(goal);
-    if (!goalNumber || goalNumber < 1 || !Number.isInteger(goalNumber)) {
-      setError('Goal must be a whole number of at least 1');
+    if (!goal || goal < 1) {
+      alert('Goal must be at least 1');
       return;
     }
 
-    onAddHabit(trimmedName, goalNumber);
-    setName('');
-    setGoal(DEFAULT_GOAL);
-    setError('');
+    const habit = {
+      id: crypto.randomUUID(),
+      name: name,
+      goal: goal,
+      progress: 0,
+    };
+
+    addHabit(habit);
+    e.target.reset();
+    e.target.elements.name.focus();
   };
 
   return (
@@ -34,8 +36,7 @@ function HabitForm({ onAddHabit }) {
         <input
           type="text"
           id="habit-name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="name"
           placeholder="e.g., Drink water"
         />
       </div>
@@ -44,16 +45,15 @@ function HabitForm({ onAddHabit }) {
         <input
           type="number"
           id="habit-goal"
-          value={goal}
-          onChange={(e) => setGoal(e.target.value)}
+          name="goal"
+          defaultValue={DEFAULT_GOAL}
           min="1"
           step="1"
         />
       </div>
-      {error && <p className="form-error">{error}</p>}
       <button type="submit" className="btn-primary">Add Habit</button>
     </form>
   );
-}
+};
 
 export default HabitForm;
