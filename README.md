@@ -1,16 +1,40 @@
-# React + Vite
+# Habit Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based habit tracking application built with Vite.
 
-Currently, two official plugins are available:
+This application allows users to create daily habits with a custom name and target goal. Each habit includes a progress counter that can be increased or decreased to track daily completion. Completed habits are visually highlighted when the defined goal is reached, and the overall daily progress is displayed at the top of the application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Habit data is managed using React hooks and persisted in the browser’s LocalStorage so that progress is retained after reloading the page. The interface is responsive and designed to work well on both desktop and mobile devices.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Add and manage daily habits
+- Track habit completion progress
+- Persistent storage using LocalStorage
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── HabitForm.jsx
+│   ├── HabitList.jsx
+│   ├── HabitListItem.jsx
+│   └── ProgressActions.jsx
+├── utils/
+│   └── storage.js
+├── constants.js
+├── App.jsx
+├── App.css
+├── index.css
+└── main.jsx
+```
+
+## Install all required dependencies and start:
+
+npm install
+
+npm run dev
+
+http://localhost:5173/ 
